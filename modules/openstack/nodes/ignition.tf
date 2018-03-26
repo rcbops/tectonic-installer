@@ -10,6 +10,8 @@ data "ignition_config" "node" {
     data.ignition_file.kubeconfig.id,
     data.ignition_file.resolv_conf.id,
     data.ignition_file.sshd.id,
+    data.ignition_file.cloud-ca.id,
+    data.ignition_file.cloud-config.id,
     var.ign_installer_kubelet_env_id,
     var.ign_installer_runtime_mappings_id,
     var.ign_max_user_watches_id,
@@ -84,6 +86,44 @@ Subsystem sftp internal-sftp
 
 PermitRootLogin no
 AuthenticationMethods publickey
+EOF
+  }
+}
+
+data "ignition_file" "cloud-ca" {
+  filesystem = "root"
+  path       = "/etc/kubernetes/cloud/cloud-ca.pem"
+  mode       = 0644
+
+  content {
+    content = "${var.cloud_ca_pem_data}"
+  }
+}
+
+data "ignition_file" "cloud-config" {
+  filesystem = "root"
+  path       = "/etc/kubernetes/cloud/config"
+  mode       = 0644
+
+  content {
+    content = <<EOF
+[Global]
+auth-url="${var.auth_url}"
+user-id="${var.user_id}"
+tenant-id="${var.tenant_id}"
+password="${var.password}"
+region="${var.region}"
+ca-file=${var.cloud_ca_pem_data != "" ? "/etc/kubernetes/cloud/cloud-ca.pem" : ""}
+[LoadBalancer]
+use-octavia=true
+subnet-id=${var.loadbalancer_subnet_id}
+floating-network-id=${var.floating_ip_network_id}
+create-monitor=yes
+monitor-delay=15s
+monitor-timeout=2s
+monitor-max-retries=2
+[BlockStorage]
+bs-version=v2
 EOF
   }
 }

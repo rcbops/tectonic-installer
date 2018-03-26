@@ -47,3 +47,36 @@ variable "ign_tectonic_path_unit_id" {
   type    = "string"
   default = ""
 }
+
+variable "loadbalancer_subnet_id" {
+  type = "string"
+}
+
+variable "floating_ip_network_id" {
+  type    = "string"
+  default = ""
+}
+
+variable "user_id" {
+  type = "string"
+}
+
+variable "tenant_id" {
+  type = "string"
+}
+
+variable "auth_url" {
+  type = "string"
+}
+
+variable "password" {
+  type = "string"
+}
+
+variable "region" {
+  type = "string"
+}
+
+variable "cloud_ca_pem_data" {
+  type = "string"
+}

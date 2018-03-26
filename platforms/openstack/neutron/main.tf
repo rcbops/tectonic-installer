@@ -237,6 +237,14 @@ EOF
   ign_update_ca_certificates_dropin_id = "${module.ignition_masters.update_ca_certificates_dropin_id}"
   instance_count                       = "${var.tectonic_master_count}"
   kubeconfig_content                   = "${module.bootkube.kubeconfig}"
+  auth_url                             = "${var.tectonic_openstack_auth_url}"
+  password                             = "${var.tectonic_openstack_password}"
+  user_id                              = "${var.tectonic_openstack_user_id}"
+  tenant_id                            = "${var.tectonic_openstack_tenant_id}"
+  region                               = "${var.tectonic_openstack_region}"
+  loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
+  cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
+  floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
 }
 
 module "ignition_workers" {
@@ -292,6 +300,14 @@ EOF
   ign_update_ca_certificates_dropin_id = "${module.ignition_workers.update_ca_certificates_dropin_id}"
   instance_count                       = "${var.tectonic_worker_count}"
   kubeconfig_content                   = "${module.bootkube.kubeconfig}"
+  auth_url                             = "${var.tectonic_openstack_auth_url}"
+  password                             = "${var.tectonic_openstack_password}"
+  user_id                              = "${var.tectonic_openstack_user_id}"
+  tenant_id                            = "${var.tectonic_openstack_tenant_id}"
+  region                               = "${var.tectonic_openstack_region}"
+  loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
+  cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
+  floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
 }
 
 module "secrets" {

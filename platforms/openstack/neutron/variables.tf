@@ -161,3 +161,52 @@ Warning: Enabling this option removes direct internet access,
 which prevents NodePorts from working.
 EOF
 }
+
+variable "tectonic_openstack_user_id" {
+  type = "string"
+
+  description = <<EOF
+The user id (not name) that Kubernetes will use when managing OpenStack resources.
+EOF
+}
+
+variable "tectonic_openstack_tenant_id" {
+  type = "string"
+
+  description = <<EOF
+The tenant id (AKA project id) that Kubernetes will use when managing OpenStack resources.
+EOF
+}
+
+variable "tectonic_openstack_password" {
+  type = "string"
+
+  description = <<EOF
+The password that Kubernetes will use when managing OpenStack resources.
+EOF
+}
+
+variable "tectonic_openstack_region" {
+  type = "string"
+
+  description = <<EOF
+The region that Kubernetes will use when managing OpenStack resources.
+EOF
+}
+
+variable "tectonic_openstack_auth_url" {
+  type = "string"
+
+  description = <<EOF
+The keystone URL that Kubernetes will use when managing OpenStack resources.
+EOF
+}
+
+variable "tectonic_openstack_ca_pem_file" {
+  type    = "string"
+  default = ""
+
+  description = <<EOF
+An optional file containing the CA for Kubernetes to use when connecting to the OpenStack endpoints
+EOF
+}
