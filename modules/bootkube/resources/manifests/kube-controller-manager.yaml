@@ -79,8 +79,8 @@ spec:
         secret:
           secretName: kube-controller-manager
       - name: cloud-config
-        secret:
-          secretName: kube-cloud-cfg
+        hostPath:
+          path: /etc/kubernetes/cloud
       - name: ssl-host
         hostPath:
           path: /etc/ssl/certs

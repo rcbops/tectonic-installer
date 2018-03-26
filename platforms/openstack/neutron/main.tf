@@ -51,8 +51,8 @@ module "identity_certs" {
 module "bootkube" {
   source = "../../../modules/bootkube"
 
-  cloud_provider        = ""
-  cloud_provider_config = ""
+  cloud_provider        = "openstack"
+  cloud_provider_config = "justenoughtotriggertheflag"
 
   cluster_name = "${var.tectonic_cluster_name}"
 

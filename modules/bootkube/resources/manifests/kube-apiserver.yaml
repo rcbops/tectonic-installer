@@ -98,8 +98,8 @@ spec:
         secret:
           secretName: kube-apiserver
       - name: cloud-config
-        secret:
-          secretName: kube-cloud-cfg
+        hostPath:
+          path: /etc/kubernetes/cloud
       - name: var-lock
         hostPath:
           path: /var/lock
