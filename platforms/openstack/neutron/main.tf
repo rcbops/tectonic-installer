@@ -1,5 +1,7 @@
 provider "openstack" {
   version = "1.2.0"
+
+  use_octavia = "true"
 }
 
 data "template_file" "etcd_hostname_list" {
