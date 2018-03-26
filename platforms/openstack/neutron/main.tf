@@ -173,6 +173,8 @@ module "ignition_masters" {
   base_domain               = "${var.tectonic_base_domain}"
   bootstrap_upgrade_cl      = "${var.tectonic_bootstrap_upgrade_cl}"
   cluster_name              = "${var.tectonic_cluster_name}"
+  cloud_provider            = "openstack"
+  cloud_provider_config     = "/etc/kubernetes/cloud/config"
   container_images          = "${var.tectonic_container_images}"
   custom_ca_cert_pem_list   = "${var.tectonic_custom_ca_pem_list}"
   etcd_advertise_name_list  = "${data.template_file.etcd_hostname_list.*.rendered}"
@@ -251,6 +253,8 @@ module "ignition_workers" {
   source = "../../../modules/ignition"
 
   bootstrap_upgrade_cl    = "${var.tectonic_bootstrap_upgrade_cl}"
+  cloud_provider          = "openstack"
+  cloud_provider_config   = "/etc/kubernetes/cloud/config"
   container_images        = "${var.tectonic_container_images}"
   custom_ca_cert_pem_list = "${var.tectonic_custom_ca_pem_list}"
   etcd_ca_cert_pem        = "${module.etcd_certs.etcd_ca_crt_pem}"
