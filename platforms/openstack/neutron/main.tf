@@ -249,7 +249,7 @@ EOF
   region                               = "${var.tectonic_openstack_region}"
   loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
-  floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
+  floating_ip_network_id               = "${var.tectonic_openstack_external_network_id}"
   authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
 }
 
@@ -315,7 +315,7 @@ EOF
   region                               = "${var.tectonic_openstack_region}"
   loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
-  floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
+  floating_ip_network_id               = "${var.tectonic_openstack_external_network_id}"
   authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
 }
 
