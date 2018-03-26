@@ -23,6 +23,7 @@ ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/cache/kubelet-pod.uuid
 ExecStart=/usr/lib/coreos/kubelet-wrapper \
   --allow-privileged \
   --anonymous-auth=false \
+  --authentication-token-webhook \
   --client-ca-file=/etc/kubernetes/ca.crt \
   --cluster-dns=${cluster_dns_ip} \
   --cluster-domain=cluster.local \
