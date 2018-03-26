@@ -8,7 +8,7 @@ resource "openstack_compute_servergroup_v2" "etcd_group" {
 
 resource "openstack_compute_instance_v2" "etcd_node" {
   count = "${var.tectonic_self_hosted_etcd != "" ? 0 : var.tectonic_etcd_count}"
-  name  = "${var.tectonic_cluster_name}_etcd_node_${count.index}"
+  name  = "${var.tectonic_cluster_name}-etcd-node-${count.index}"
 
   image_name = "${var.tectonic_openstack_image_name}"
   image_id   = "${var.tectonic_openstack_image_id}"
