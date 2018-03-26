@@ -32,13 +32,15 @@ ExecStart=/usr/lib/coreos/kubelet-wrapper \
   ${cni_bin_dir_flag} \
   --cni-conf-dir=/etc/kubernetes/cni/net.d \
   ${debug_config} \
+  --eviction-hard=memory.available<500Mi \
   --exit-on-lock-contention \
   --kubeconfig=/etc/kubernetes/kubeconfig \
   --lock-file=/var/run/lock/kubelet.lock \
   --network-plugin=cni \
   --node-labels=${node_label} \
   ${node_taints_param} \
-  --pod-manifest-path=/etc/kubernetes/manifests
+  --pod-manifest-path=/etc/kubernetes/manifests \
+  --system-reserved=memory=1.5Gi
 
 ExecStop=-/usr/bin/rkt stop --uuid-file=/var/cache/kubelet-pod.uuid
 
