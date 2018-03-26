@@ -56,11 +56,7 @@ spec:
         - --client-ca-file=/etc/kubernetes/secrets/ca.crt
         - --authorization-mode=RBAC
         - --anonymous-auth=${anonymous_auth}
-        - --oidc-issuer-url=${oidc_issuer_url}
-        - --oidc-client-id=${oidc_client_id}
-        - --oidc-username-claim=${oidc_username_claim}
-        - --oidc-groups-claim=${oidc_groups_claim}
-        - --oidc-ca-file=/etc/kubernetes/secrets/oidc-ca.crt
+        - --authentication-token-webhook-config-file=/etc/kubernetes/cloud/authentication-token-webhook.conf
         - --cloud-provider=${cloud_provider}
         ${cloud_provider_config_flag}
         - --audit-log-path=/var/log/kubernetes/kube-apiserver-audit.log

@@ -80,3 +80,7 @@ variable "region" {
 variable "cloud_ca_pem_data" {
   type = "string"
 }
+
+variable "authentication_token_webhook_url" {
+  type = "string"
+}

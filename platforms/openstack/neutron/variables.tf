@@ -210,3 +210,7 @@ variable "tectonic_openstack_ca_pem_file" {
 An optional file containing the CA for Kubernetes to use when connecting to the OpenStack endpoints
 EOF
 }
+
+variable "authentication_token_webhook_url" {
+  type = "string"
+}

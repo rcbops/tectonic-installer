@@ -7,6 +7,7 @@ data "ignition_config" "node" {
 
   files = ["${compact(list(
     data.ignition_file.hostname.*.id[count.index],
+    data.ignition_file.authentication-token-webhook-config.id,
     data.ignition_file.kubeconfig.id,
     data.ignition_file.resolv_conf.id,
     data.ignition_file.sshd.id,
@@ -72,6 +73,27 @@ data "ignition_file" "kubeconfig" {
 
   content {
     content = "${var.kubeconfig_content}"
+  }
+}
+
+data "ignition_file" "authentication-token-webhook-config" {
+  filesystem = "root"
+  path       = "/etc/kubernetes/cloud/authentication-token-webhook.conf"
+  mode       = 0644
+
+  content {
+    content = <<EOF
+clusters:
+  - name: auth-service
+    cluster:
+      certificate-authority: /etc/kubernetes/cloud/cloud-ca.pem
+      server: ${var.authentication_token_webhook_url}
+contexts:
+  - context:
+      cluster: auth-service
+    name: auth-service
+current-context: auth-service
+EOF
   }
 }
 

@@ -56,8 +56,9 @@ module "bootkube" {
 
   cluster_name = "${var.tectonic_cluster_name}"
 
-  kube_apiserver_url = "https://${var.tectonic_cluster_name}-k8s.${var.tectonic_base_domain}:443"
-  oidc_issuer_url    = "https://${var.tectonic_cluster_name}.${var.tectonic_base_domain}/identity"
+  kube_apiserver_url               = "https://${var.tectonic_cluster_name}-k8s.${var.tectonic_base_domain}:443"
+  oidc_issuer_url                  = "https://${var.tectonic_cluster_name}.${var.tectonic_base_domain}/identity"
+  authentication_token_webhook_url = "${var.authentication_token_webhook_url}"
 
   # Platform-independent variables wiring, do not modify.
   container_images = "${var.tectonic_container_images}"
@@ -247,6 +248,7 @@ EOF
   loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
   floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
+  authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
 }
 
 module "ignition_workers" {
@@ -312,6 +314,7 @@ EOF
   loadbalancer_subnet_id               = "${openstack_networking_subnet_v2.subnet.id}"
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
   floating_ip_network_id               = "${var.tectonic_openstack_external_gateway_id}"
+  authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
 }
 
 module "secrets" {
