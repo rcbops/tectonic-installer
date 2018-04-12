@@ -1,0 +1,23 @@
+[Unit]
+Description=Prometheus Node Exporter
+After=etcd-member.service
+Requires=etcd-member.service
+
+[Service]
+ExecStart=/usr/bin/rkt run \
+  --volume proc,kind=host,readOnly=true,source=/proc \
+  --mount volume=proc,target=/host/proc \
+  --volume sys,kind=host,readOnly=true,source=/sys \
+  --mount volume=sys,target=/host/sys \
+  --net=host \
+  --trust-keys-from-https \
+  quay.io/prometheus/node-exporter:v0.15.0 \
+  --insecure-options=seccomp \
+  -- \
+  --path.procfs=/host/proc \
+  --path.sysfs=/host/sys
+KillMode=mixed
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

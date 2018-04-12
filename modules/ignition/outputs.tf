@@ -102,6 +102,10 @@ output "etcd_dropin_rendered_list" {
   value = "${data.template_file.etcd.*.rendered}"
 }
 
+output "node_exporter_service_id" {
+  value = "${data.ignition_systemd_unit.node_exporter.id}"
+}
+
 output "coreos_metadata_dropin_id" {
   value = "${data.ignition_systemd_unit.coreos_metadata.id}"
 }

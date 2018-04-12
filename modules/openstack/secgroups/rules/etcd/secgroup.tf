@@ -18,3 +18,13 @@ resource "openstack_networking_secgroup_rule_v2" "bootstrap_etcd" {
   remote_ip_prefix  = "${var.cluster_cidr}"
   security_group_id = "${var.secgroup_id}"
 }
+
+resource "openstack_networking_secgroup_rule_v2" "etcd_node_exporter" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  port_range_min    = 9100
+  port_range_max    = 9100
+  protocol          = "tcp"
+  remote_ip_prefix  = "${var.cluster_cidr}"
+  security_group_id = "${var.secgroup_id}"
+}

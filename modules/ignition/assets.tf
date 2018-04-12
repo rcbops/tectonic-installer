@@ -289,3 +289,10 @@ data "ignition_file" "nfs_config" {
     content = "${file(var.nfs_config_file)}"
   }
 }
+
+data "ignition_systemd_unit" "node_exporter" {
+  name    = "node-exporter.service"
+  enabled = true
+
+  content = "${file("${path.module}/resources/services/node-exporter.service")}"
+}
