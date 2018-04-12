@@ -162,6 +162,7 @@ EOF
   ign_coreos_metadata_dropin_id = "${module.ignition_masters.coreos_metadata_dropin_id}"
   ign_etcd_crt_id_list          = "${module.ignition_masters.etcd_crt_id_list}"
   ign_etcd_dropin_id_list       = "${module.ignition_masters.etcd_dropin_id_list}"
+  ign_node_exporter_service_id   = "${module.ignition_masters.node_exporter_service_id}"
   ign_profile_env_id            = "${module.ignition_masters.profile_env_id}"
   ign_systemd_default_env_id    = "${module.ignition_masters.systemd_default_env_id}"
   ign_ntp_dropin_id             = "${length(var.tectonic_ntp_servers) > 0 ? module.ignition_masters.ntp_dropin_id : ""}"

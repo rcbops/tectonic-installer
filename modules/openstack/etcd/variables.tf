@@ -36,6 +36,10 @@ variable "ign_etcd_dropin_id_list" {
   type = "list"
 }
 
+variable "ign_node_exporter_service_id" {
+  type = "string"
+}
+
 variable "ign_coreos_metadata_dropin_id" {
   type = "string"
 }
