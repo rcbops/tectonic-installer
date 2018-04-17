@@ -155,20 +155,21 @@ search ${var.tectonic_base_domain}
 ${join("\n", formatlist("nameserver %s", var.tectonic_openstack_dns_nameservers))}
 EOF
 
-  base_domain                   = "${var.tectonic_base_domain}"
-  cluster_name                  = "${var.tectonic_cluster_name}"
-  container_image               = "${var.tectonic_container_images["etcd"]}"
-  core_public_keys              = ["${module.secrets.core_public_key_openssh}"]
-  ign_coreos_metadata_dropin_id = "${module.ignition_masters.coreos_metadata_dropin_id}"
-  ign_etcd_crt_id_list          = "${module.ignition_masters.etcd_crt_id_list}"
-  ign_etcd_dropin_id_list       = "${module.ignition_masters.etcd_dropin_id_list}"
-  ign_node_exporter_service_id   = "${module.ignition_masters.node_exporter_service_id}"
-  ign_profile_env_id            = "${module.ignition_masters.profile_env_id}"
-  ign_systemd_default_env_id    = "${module.ignition_masters.systemd_default_env_id}"
-  ign_ntp_dropin_id             = "${length(var.tectonic_ntp_servers) > 0 ? module.ignition_masters.ntp_dropin_id : ""}"
-  instance_count                = "${var.tectonic_etcd_count}"
-  self_hosted_etcd              = "${var.tectonic_self_hosted_etcd}"
-  tls_enabled                   = "${var.tectonic_etcd_tls_enabled}"
+  base_domain                      = "${var.tectonic_base_domain}"
+  cluster_name                     = "${var.tectonic_cluster_name}"
+  container_image                  = "${var.tectonic_container_images["etcd"]}"
+  core_public_keys                 = ["${module.secrets.core_public_key_openssh}"]
+  ign_coreos_metadata_dropin_id    = "${module.ignition_masters.coreos_metadata_dropin_id}"
+  ign_etcd_crt_id_list             = "${module.ignition_masters.etcd_crt_id_list}"
+  ign_etcd_dropin_id_list          = "${module.ignition_masters.etcd_dropin_id_list}"
+  ign_node_exporter_service_id     = "${module.ignition_masters.node_exporter_service_id}"
+  ign_profile_env_id               = "${module.ignition_masters.profile_env_id}"
+  ign_systemd_default_env_id       = "${module.ignition_masters.systemd_default_env_id}"
+  ign_ntp_dropin_id                = "${length(var.tectonic_ntp_servers) > 0 ? module.ignition_masters.ntp_dropin_id : ""}"
+  instance_count                   = "${var.tectonic_etcd_count}"
+  rackspace_authorized_public_keys = "${var.rackspace_authorized_public_keys}"
+  self_hosted_etcd                 = "${var.tectonic_self_hosted_etcd}"
+  tls_enabled                      = "${var.tectonic_etcd_tls_enabled}"
 }
 
 module "ignition_masters" {
@@ -252,6 +253,7 @@ EOF
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
   floating_ip_network_id               = "${var.tectonic_openstack_external_network_id}"
   authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
+  rackspace_authorized_public_keys     = "${var.rackspace_authorized_public_keys}"
 }
 
 module "ignition_workers" {
@@ -318,6 +320,7 @@ EOF
   cloud_ca_pem_data                    = "${file(var.tectonic_openstack_ca_pem_file != "" ? pathexpand(var.tectonic_openstack_ca_pem_file) : "/dev/null")}"
   floating_ip_network_id               = "${var.tectonic_openstack_external_network_id}"
   authentication_token_webhook_url     = "${var.authentication_token_webhook_url}"
+  rackspace_authorized_public_keys     = "${var.rackspace_authorized_public_keys}"
 }
 
 module "secrets" {

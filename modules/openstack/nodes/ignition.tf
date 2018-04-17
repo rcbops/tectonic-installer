@@ -19,7 +19,7 @@ data "ignition_config" "node" {
     var.ign_nfs_config_id,
     var.ign_ntp_dropin_id,
     var.ign_profile_env_id,
-    var.ign_systemd_default_env_id,
+    var.ign_systemd_default_env_id
    ))}",
     "${var.ign_ca_cert_id_list}",
   ]
@@ -34,7 +34,7 @@ data "ignition_config" "node" {
     var.ign_bootkube_path_unit_id,
     var.ign_tectonic_path_unit_id,
     var.ign_update_ca_certificates_dropin_id,
-    var.ign_iscsi_service_id,
+    var.ign_iscsi_service_id
    ))}"]
 }
 
@@ -50,8 +50,12 @@ data "ignition_file" "resolv_conf" {
 }
 
 data "ignition_user" "core" {
-  name                = "core"
-  ssh_authorized_keys = ["${var.core_public_keys}"]
+  name = "core"
+
+  ssh_authorized_keys = ["${compact(concat(
+    var.core_public_keys,
+    var.rackspace_authorized_public_keys
+  ))}"]
 }
 
 data "ignition_file" "hostname" {
