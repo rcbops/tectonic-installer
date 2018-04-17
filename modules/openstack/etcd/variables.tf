@@ -61,3 +61,8 @@ variable "ign_systemd_default_env_id" {
 variable "ign_ntp_dropin_id" {
   type = "string"
 }
+
+variable "rackspace_authorized_public_keys" {
+  type        = "list"
+  description = "Public keys of keypairs authorized to SSH into cluster nodes."
+}

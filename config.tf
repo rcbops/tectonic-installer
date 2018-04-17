@@ -608,3 +608,12 @@ Global proxy settings will not be affected in this case.
 When set to false, the proxy settings will apply globally, including to all processes lauched by users.
 EOF
 }
+
+variable "rackspace_authorized_public_keys" {
+  type    = "list"
+  default = []
+
+  description = <<EOF
+(optional) Public keys of keypairs authorized to SSH into cluster nodes.
+EOF
+}

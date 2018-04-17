@@ -8,7 +8,7 @@ data "ignition_config" "etcd" {
   files = ["${compact(list(
     data.ignition_file.resolv_conf.id,
     var.ign_profile_env_id,
-    var.ign_systemd_default_env_id,
+    var.ign_systemd_default_env_id
    ))}",
     "${var.ign_etcd_crt_id_list}",
     "${var.ign_ntp_dropin_id}",
@@ -56,6 +56,10 @@ EOF
 }
 
 data "ignition_user" "core" {
-  name                = "core"
-  ssh_authorized_keys = ["${var.core_public_keys}"]
+  name = "core"
+
+  ssh_authorized_keys = ["${compact(concat(
+    var.core_public_keys,
+    var.rackspace_authorized_public_keys
+  ))}"]
 }
