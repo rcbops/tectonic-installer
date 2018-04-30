@@ -64,6 +64,40 @@ data "ignition_file" "ntp_dropin" {
   }
 }
 
+data "template_file" "eta_env" {
+  template = "${file("${path.module}/resources/eta/eta.env")}"
+
+  vars {
+    etp_proxy_host = "${var.etp_proxy_host}"
+    etp_proxy_port = "${var.etp_proxy_port}"
+  }
+}
+
+data "ignition_file" "eta_env" {
+  filesystem = "root"
+  path       = "/etc/eta/eta.env"
+  mode       = 0644
+
+  content {
+    content = "${data.template_file.eta_env.rendered}"
+  }
+}
+
+data "template_file" "eta" {
+  template = "${file("${path.module}/resources/services/eta.service")}"
+
+  vars {
+    eta_image = "${var.eta_image}"
+    eta_tag   = "${var.eta_tag}"
+  }
+}
+
+data "ignition_systemd_unit" "eta" {
+  name    = "eta.service"
+  enabled = true
+  content = "${data.template_file.eta.rendered}"
+}
+
 data "template_file" "kubelet" {
   template = "${file("${path.module}/resources/services/kubelet.service")}"
 

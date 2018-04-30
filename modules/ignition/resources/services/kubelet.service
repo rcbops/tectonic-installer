@@ -1,6 +1,8 @@
 [Unit]
 Description=Kubelet via Hyperkube ACI
 Wants=rpc-statd.service
+After=eta.service
+Requires=eta.service
 [Service]
 EnvironmentFile=/etc/kubernetes/kubelet.env
 Environment="RKT_RUN_ARGS=--uuid-file-save=/var/cache/kubelet-pod.uuid \

@@ -214,3 +214,19 @@ EOF
 variable "authentication_token_webhook_url" {
   type = "string"
 }
+
+variable "eta_image" {
+  type = "string"
+}
+
+variable "eta_tag" {
+  type = "string"
+}
+
+variable "etp_proxy_host" {
+  type = "string"
+}
+
+variable "etp_proxy_port" {
+  type = "string"
+}

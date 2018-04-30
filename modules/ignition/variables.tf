@@ -196,3 +196,23 @@ variable "nfs_config_file" {
 variable "proxy_exclusive_units" {
   type = "string"
 }
+
+variable "eta_image" {
+  type    = "string"
+  default = ""
+}
+
+variable "eta_tag" {
+  type    = "string"
+  default = ""
+}
+
+variable "etp_proxy_host" {
+  type    = "string"
+  default = ""
+}
+
+variable "etp_proxy_port" {
+  type    = "string"
+  default = ""
+}
