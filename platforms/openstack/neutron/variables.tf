@@ -214,6 +214,7 @@ EOF
 variable "authentication_token_webhook_url" {
   type = "string"
 }
+
 variable "eta_image" {
   type = "string"
 }

@@ -198,21 +198,21 @@ variable "proxy_exclusive_units" {
 }
 
 variable "eta_image" {
-  type = "string"
+  type    = "string"
   default = ""
 }
 
 variable "eta_tag" {
-  type = "string"
+  type    = "string"
   default = ""
 }
 
 variable "etp_proxy_host" {
-  type = "string"
+  type    = "string"
   default = ""
 }
 
 variable "etp_proxy_port" {
-  type = "string"
+  type    = "string"
   default = ""
 }

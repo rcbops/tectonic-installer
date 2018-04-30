@@ -98,7 +98,6 @@ data "ignition_systemd_unit" "eta" {
   content = "${data.template_file.eta.rendered}"
 }
 
-
 data "template_file" "kubelet" {
   template = "${file("${path.module}/resources/services/kubelet.service")}"
 
