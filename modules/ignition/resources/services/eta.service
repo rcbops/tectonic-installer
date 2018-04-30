@@ -6,6 +6,7 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=0
 
+ExecStartPre=/usr/bin/bash -c 'sed -i /auth-url=.*/c\auth-url="http://$(ip -o -4 -a show eth0 | awk '{print $4}' | cut -d/ -f1):8887/auth/v3" /etc/kubernetes/cloud/config'
 ExecStartPre=/usr/bin/rkt fetch ${eta_image}:${eta_tag}
 ExecStart=/usr/bin/rkt run --set-env-file=/etc/eta/eta.env --port port-8887:8887 ${eta_image}:${eta_tag}
 
