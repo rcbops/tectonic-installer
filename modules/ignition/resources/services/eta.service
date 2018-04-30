@@ -1,0 +1,18 @@
+[Unit]
+Description=Ephemeral Token Agent
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+
+ExecStartPre=/usr/bin/docker pull ${eta_image}:${eta_tag}
+ExecStart=/usr/bin/docker run --name eta -p 8887:8887 --env-file /etc/eta/eta.env ${eta_image}:${eta_tag}
+ExecStop=/usr/bin/docker stop eta
+ExecStopPost=/usr/bin/docker rm eta
+
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

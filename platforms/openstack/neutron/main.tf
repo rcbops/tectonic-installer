@@ -211,6 +211,10 @@ module "ignition_masters" {
   proxy_exclusive_units     = "${var.tectonic_proxy_exclusive_units}"
   tectonic_vanilla_k8s      = "${var.tectonic_vanilla_k8s}"
   use_metadata              = "false"
+  eta_image                 = "${var.eta_image}"
+  eta_tag                   = "${var.eta_tag}"
+  etp_proxy_host            = "${var.etp_proxy_host}"
+  etp_proxy_port            = "${var.etp_proxy_port}"
 }
 
 module "master_nodes" {
@@ -232,6 +236,8 @@ EOF
   ign_installer_runtime_mappings_id    = "${module.ignition_masters.installer_runtime_mappings_id}"
   ign_iscsi_service_id                 = "${module.ignition_masters.iscsi_service_id}"
   ign_k8s_node_bootstrap_service_id    = "${module.ignition_masters.k8s_node_bootstrap_service_id}"
+  ign_eta_env_id                       = "${module.ignition_masters.eta_env_id}"
+  ign_eta_service_id                   = "${module.ignition_masters.eta_service_id}"
   ign_kubelet_service_id               = "${module.ignition_masters.kubelet_service_id}"
   ign_locksmithd_service_id            = "${module.ignition_masters.locksmithd_service_id}"
   ign_max_user_watches_id              = "${module.ignition_masters.max_user_watches_id}"
@@ -282,6 +288,10 @@ module "ignition_workers" {
   ntp_servers             = "${var.tectonic_ntp_servers}"
   proxy_exclusive_units   = "${var.tectonic_proxy_exclusive_units}"
   tectonic_vanilla_k8s    = "${var.tectonic_vanilla_k8s}"
+  eta_image               = "${var.eta_image}"
+  eta_tag                 = "${var.eta_tag}"
+  etp_proxy_host          = "${var.etp_proxy_host}"
+  etp_proxy_port          = "${var.etp_proxy_port}"
 }
 
 module "worker_nodes" {
@@ -301,6 +311,8 @@ EOF
   ign_installer_runtime_mappings_id    = "${module.ignition_workers.installer_runtime_mappings_id}"
   ign_iscsi_service_id                 = "${module.ignition_workers.iscsi_service_id}"
   ign_k8s_node_bootstrap_service_id    = "${module.ignition_workers.k8s_node_bootstrap_service_id}"
+  ign_eta_env_id                       = "${module.ignition_workers.eta_env_id}"
+  ign_eta_service_id                   = "${module.ignition_workers.eta_service_id}"
   ign_kubelet_service_id               = "${module.ignition_workers.kubelet_service_id}"
   ign_locksmithd_service_id            = "${module.ignition_workers.locksmithd_service_id}"
   ign_max_user_watches_id              = "${module.ignition_workers.max_user_watches_id}"

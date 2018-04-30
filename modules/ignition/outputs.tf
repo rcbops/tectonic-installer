@@ -183,3 +183,19 @@ output "nfs_config_id" {
 output "nfs_config_rendered" {
   value = "${file(var.nfs_config_file)}"
 }
+
+output "eta_service_id" {
+  value = "${data.ignition_systemd_unit.eta.id}"
+}
+
+output "eta_service_rendered" {
+  value = "${data.template_file.eta.rendered}"
+}
+
+output "eta_env_id" {
+  value = "${data.ignition_file.eta_env.id}"
+}
+
+output "eta_env_rendered" {
+  value = "${data.template_file.eta_env.rendered}"
+}
