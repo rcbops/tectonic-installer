@@ -6,10 +6,10 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=0
 
-ExecStartPre=/usr/bin/docker pull ${eta_image}:${eta_tag}
-ExecStart=/usr/bin/docker run --name eta -p 8887:8887 --env-file /etc/eta/eta.env ${eta_image}:${eta_tag}
-ExecStop=/usr/bin/docker stop eta
-ExecStopPost=/usr/bin/docker rm eta
+ExecStartPre=/usr/bin/rkt fetch ${eta_image}:${eta_tag}
+ExecStart=/usr/bin/rkt run --set-env-file=/etc/eta/eta.env --port port-8887:8887 ${eta_image}:${eta_tag}
+
+KillMode=mixed
 
 Restart=always
 RestartSec=10
