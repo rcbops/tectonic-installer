@@ -63,6 +63,8 @@ spec:
         - --audit-log-maxage=30
         - --audit-log-maxbackup=3
         - --audit-log-maxsize=100
+        - --audit-log-format=json
+        - --audit-policy-file=/etc/kubernetes/kube-apiserver-audit-policy.yaml
         volumeMounts:
         - mountPath: /etc/ssl/certs
           name: ssl-certs-host
@@ -79,6 +81,9 @@ spec:
         - mountPath: /var/log/kubernetes
           name: var-log-kubernetes
           readOnly: false
+        - mountPath: /etc/kubernetes
+          name: audit-policy-file
+        mountPath: /etc/config
       hostNetwork: true
       tolerations:
       - key: "node-role.kubernetes.io/master"
@@ -102,3 +107,6 @@ spec:
       - name: var-log-kubernetes
         hostPath:
           path: /var/log/kubernetes
+      - name: audit-policy-file
+        configMap:
+          name: kube-apiserver-audit-policy
