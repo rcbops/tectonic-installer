@@ -30,7 +30,7 @@
     "babyparse": "0.4.x",
     "classnames": "2.2.x",
     "file-saver": "1.3.x",
-    "immutable": "3.8.x",
+    "immutable": "4.3.x",
     "js-cookie": "2.1.x",
     "jwt-decode": "2.1.x",
     "lodash": "4.x",
